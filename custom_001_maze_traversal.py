@@ -27,6 +27,8 @@
 
     Output:
         [(1, 5), (2, 5), (2, 4), (2, 3), (3, 3), (4, 3), (5, 3), (5, 4), (5, 5)]
+        OR
+        [(1, 5), (1, 4), (2, 4), (2, 3), (3, 3), (4, 3), (5, 3), (5, 4), (5, 5)]
 
     Explanation:
         The solution can be seen below, where the dots (•) represent the shortest path from start to finish:
@@ -39,21 +41,20 @@
             5 X     • • • X
             6 X X X X X X X
 """
-
-
 ####################
 # Global Variables #
 ####################
 
-# Global variable containing the final result of the recursive DFS algorithm.
+# Global list containing the final result of the recursive DFS algorithm.
 # Note: Unable to return the value from the recursive function for unknown reason.
 dfs_path = []
 
+# Global list containing the legal moves from a given coordinate, ordered by priority (up, right, down, left).
 directions = [
-    [-1, 0],    # Up
-    [0, 1],     # Right
-    [1, 0],     # Down
-    [0, -1]     # Left
+    [-1, 0],  # Up
+    [0, 1],  # Right
+    [1, 0],  # Down
+    [0, -1]  # Left
 ]
 
 
@@ -72,8 +73,11 @@ def example_1():
         ['X', 'X', 'X', 'X', 'X', 'X', 'X']
     ]
     start = 1, 5
-    solution = [(1, 5), (2, 5), (2, 4), (2, 3), (3, 3), (4, 3), (5, 3), (5, 4), (5, 5)]
-    return maze, start, solution
+    solutions = [
+        [(1, 5), (2, 5), (2, 4), (2, 3), (3, 3), (4, 3), (5, 3), (5, 4), (5, 5)],
+        [(1, 5), (1, 4), (2, 4), (2, 3), (3, 3), (4, 3), (5, 3), (5, 4), (5, 5)]
+    ]
+    return maze, start, solutions
 
 
 ################
@@ -86,11 +90,11 @@ def solution_dfs(maze, start):
     h = len(maze)
     if not h:
         return
-    l = len(maze[0])
+    w = len(maze[0])
 
     visited = [
-        [False for col in range(l)] 
-        for row in range(h)
+        [False for _ in range(w)]
+        for _ in range(h)
     ]
     dfs(maze, start[0], start[1], [], visited)
 
@@ -100,14 +104,13 @@ def solution_dfs(maze, start):
 def dfs(maze, row, col, path, visited):
     global dfs_path, directions
 
-    h, l = len(maze), len(maze[0])
+    h, w = len(maze), len(maze[0])
     val = maze[row][col]
 
-    invalid_row = row < 0 or row >= len(maze)
-    invalid_col = col < 0 or col >= len(maze[0])
+    invalid_row = row < 0 or row >= h
+    invalid_col = col < 0 or col >= w
     invalid_val = val == 'X'
-    already_visited = visited[row][col] == True
-    if invalid_row or invalid_col or invalid_val or already_visited:
+    if invalid_row or invalid_col or invalid_val or visited[row][col]:
         return
 
     visited[row][col] = True
@@ -121,6 +124,39 @@ def dfs(maze, row, col, path, visited):
 
 
 ################
+# BFS Solution #
+################
+
+def solution_bfs(maze, start):
+    queue = [[start]]
+    h, w = len(maze), len(maze[0])
+    visited = [
+        [False for _ in range(w)]
+        for _ in range(h)
+    ]
+
+    while queue:
+        path = queue.pop(0)
+        y, x = path[-1]
+        val = maze[y][x]
+
+        if val == 'E':
+            return path
+
+        for _y, _x in directions:
+            row, col = y + _y, x + _x
+
+            invalid_row = row < 0 or row >= h
+            invalid_col = col < 0 or col >= w
+            invalid_val = val == 'X'
+            if invalid_row or invalid_col or invalid_val or visited[row][col]:
+                continue
+
+            queue.append(path + [(row, col)])
+            visited[row][col] = True
+
+
+################
 # Main Program #
 ################
 
@@ -128,12 +164,21 @@ def main():
     # Define which test cases to run
     tests = [example_1]
 
+    # Define which solution to use for testing
+    solution = solution_bfs
+
     # Execute the tests and print the results
     for i, test in enumerate(tests):
-        test_maze, test_start, test_solution = test()
-        result = 'PASS' if solution_dfs(test_maze, test_start) == test_solution else 'FAIL'
-        print(f'Test #{i+1}: {result}')
+        test_maze, test_start, test_solutions = test()
+        solution_output = solution(test_maze, test_start)
+
+        # Test all possible solutions for the current test
+        result = 'PASS' if solution_output in test_solutions else 'FAIL'
+
+        # Print the results for the current test
+        print(f'Test #{i + 1}: {result}')
 
 
 if __name__ == '__main__':
+    # Execute the main program
     main()
