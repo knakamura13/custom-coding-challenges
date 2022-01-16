@@ -41,11 +41,12 @@
             5 X     • • • X
             6 X X X X X X X
 """
-###########
-# Imports #
-###########
+###################
+# Import packages #
+###################
 
 import unittest
+
 
 ####################
 # Global Variables #
@@ -63,136 +64,117 @@ directions = [
     [0, -1]  # Left
 ]
 
+test_mazes = [
+    # Test case #1
+    [
+        # Maze
+        [
+            ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
+            ['X', ' ', 'X', 'X', ' ', 'S', 'X'],
+            ['X', ' ', ' ', ' ', ' ', ' ', 'X'],
+            ['X', ' ', ' ', ' ', 'X', ' ', 'X'],
+            ['X', 'X', 'X', ' ', 'X', 'X', 'X'],
+            ['X', ' ', ' ', ' ', ' ', 'E', 'X'],
+            ['X', 'X', 'X', 'X', 'X', 'X', 'X']
+        ],
+        # Start
+        (1, 5),
+        # Solutions
+        [
+            [(1, 5), (2, 5), (2, 4), (2, 3), (3, 3), (4, 3), (5, 3), (5, 4), (5, 5)],
+            [(1, 5), (1, 4), (2, 4), (2, 3), (3, 3), (4, 3), (5, 3), (5, 4), (5, 5)]
+        ]
+    ]
+]
+
 
 ################
-# Main Program #
+# DFS Solution #
 ################
 
-class Solution(unittest.TestCase):
-    def __init__(self, methodName: str = ...):
-        super().__init__(methodName)
-        self.solution_bfs = None
+def solution_dfs(maze, start):
+    global dfs_path
 
-    def main(self):
-        # Define which test cases to run
-        tests = self.test_cases
+    h = len(maze)
+    if not h:
+        return
+    w = len(maze[0])
 
-        # Define which solution to use for testing
-        solution = self.solution_bfs
+    visited = [
+        [False for _ in range(w)]
+        for _ in range(h)
+    ]
+    dfs(maze, start[0], start[1], [], visited)
 
-        # Execute the tests and print the results
-        for i, test in enumerate(tests):
-            test_maze, test_start, test_solutions = test()
-            solution_output = solution(test_maze, test_start)
+    return dfs_path
 
-            # Test all possible solutions for the current test
-            assert (solution_output in test_solutions)
 
-    ##############
-    # Test Cases #
-    ##############
+def dfs(maze, row, col, path, visited):
+    global dfs_path, directions
 
-    def test_cases(self):
-        return [
-            (
-                # Maze
-                [
-                    ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
-                    ['X', ' ', 'X', 'X', ' ', 'S', 'X'],
-                    ['X', ' ', ' ', ' ', ' ', ' ', 'X'],
-                    ['X', ' ', ' ', ' ', 'X', ' ', 'X'],
-                    ['X', 'X', 'X', ' ', 'X', 'X', 'X'],
-                    ['X', ' ', ' ', ' ', ' ', 'E', 'X'],
-                    ['X', 'X', 'X', 'X', 'X', 'X', 'X']
-                ],
-                # Start
-                (1, 5),
-                # Solutions
-                [
-                    [(1, 5), (2, 5), (2, 4), (2, 3), (3, 3), (4, 3), (5, 3), (5, 4), (5, 5)],
-                    [(1, 5), (1, 4), (2, 4), (2, 3), (3, 3), (4, 3), (5, 3), (5, 4), (5, 5)]
-                ]
-            )
-        ]
+    h, w = len(maze), len(maze[0])
+    val = maze[row][col]
 
-    ################
-    # DFS Solution #
-    ################
+    invalid_row = row < 0 or row >= h
+    invalid_col = col < 0 or col >= w
+    invalid_val = val == 'X'
+    if invalid_row or invalid_col or invalid_val or visited[row][col]:
+        return
 
-    def solution_dfs(self, maze, start):
-        global dfs_path
+    visited[row][col] = True
+    path.append((row, col))
+    if val == 'E':
+        dfs_path = path
+        return
 
-        h = len(maze)
-        if not h:
-            return
-        w = len(maze[0])
+    for _y, _x in directions:
+        dfs(maze, row + _y, col + _x, path.copy(), visited)
 
-        visited = [
-            [False for _ in range(w)]
-            for _ in range(h)
-        ]
-        self.dfs(maze, start[0], start[1], [], visited)
 
-        return dfs_path
+################
+# BFS Solution #
+################
 
-    def dfs(self, maze, row, col, path, visited):
-        global dfs_path, directions
+def solution_bfs(maze, start):
+    queue = [[start]]
+    h, w = len(maze), len(maze[0])
+    visited = [
+        [False for _ in range(w)]
+        for _ in range(h)
+    ]
 
-        h, w = len(maze), len(maze[0])
-        val = maze[row][col]
+    while queue:
+        path = queue.pop(0)
+        y, x = path[-1]
+        val = maze[y][x]
 
-        invalid_row = row < 0 or row >= h
-        invalid_col = col < 0 or col >= w
-        invalid_val = val == 'X'
-        if invalid_row or invalid_col or invalid_val or visited[row][col]:
-            return
-
-        visited[row][col] = True
-        path.append((row, col))
         if val == 'E':
-            dfs_path = path
-            return
+            return path
 
         for _y, _x in directions:
-            self.dfs(maze, row + _y, col + _x, path.copy(), visited)
+            row, col = y + _y, x + _x
 
-    ################
-    # BFS Solution #
-    ################
+            invalid_row = row < 0 or row >= h
+            invalid_col = col < 0 or col >= w
+            invalid_val = val == 'X'
+            if invalid_row or invalid_col or invalid_val or visited[row][col]:
+                continue
 
-    # def solution_bfs(self, maze, start):
-    #     queue = [[start]]
-    #     h, w = len(maze), len(maze[0])
-    #     visited = [
-    #         [False for _ in range(w)]
-    #         for _ in range(h)
-    #     ]
-    #
-    #     while queue:
-    #         path = queue.pop(0)
-    #         y, x = path[-1]
-    #         val = maze[y][x]
-    #
-    #         if val == 'E':
-    #             return path
-    #
-    #         for _y, _x in directions:
-    #             row, col = y + _y, x + _x
-    #
-    #             invalid_row = row < 0 or row >= h
-    #             invalid_col = col < 0 or col >= w
-    #             invalid_val = val == 'X'
-    #             if invalid_row or invalid_col or invalid_val or visited[row][col]:
-    #                 continue
-    #
-    #             queue.append(path + [(row, col)])
-    #             visited[row][col] = True
+            queue.append(path + [(row, col)])
+            visited[row][col] = True
 
-    def bfs_solution(self):
-        path = []
-        return path
+
+class Tests(unittest.TestCase):
+    def test_bfs(self):
+        for maze, start, solutions in test_mazes:
+            output = solution_bfs(maze, start)
+            self.assertIn(output, solutions)
+
+    def test_dfs(self):
+        for maze, start, solutions in test_mazes:
+            output = solution_dfs(maze, start)
+            self.assertIn(output, solutions)
 
 
 if __name__ == '__main__':
-    # Execute the main program
     unittest.main()
