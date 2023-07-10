@@ -57,33 +57,28 @@ import unittest
 dfs_path = []
 
 # Global list containing the legal moves from a given coordinate, ordered by priority (up, right, down, left).
-directions = [
-    [-1, 0],  # Up
-    [0, 1],  # Right
-    [1, 0],  # Down
-    [0, -1]  # Left
-]
+directions = [[-1, 0], [0, 1], [1, 0], [0, -1]]  # Up  # Right  # Down  # Left
 
 test_mazes = [
     # Test case #1
     [
         # Maze
         [
-            ['X', 'X', 'X', 'X', 'X', 'X', 'X'],
-            ['X', ' ', 'X', 'X', ' ', 'S', 'X'],
-            ['X', ' ', ' ', ' ', ' ', ' ', 'X'],
-            ['X', ' ', ' ', ' ', 'X', ' ', 'X'],
-            ['X', 'X', 'X', ' ', 'X', 'X', 'X'],
-            ['X', ' ', ' ', ' ', ' ', 'E', 'X'],
-            ['X', 'X', 'X', 'X', 'X', 'X', 'X']
+            ["X", "X", "X", "X", "X", "X", "X"],
+            ["X", " ", "X", "X", " ", "S", "X"],
+            ["X", " ", " ", " ", " ", " ", "X"],
+            ["X", " ", " ", " ", "X", " ", "X"],
+            ["X", "X", "X", " ", "X", "X", "X"],
+            ["X", " ", " ", " ", " ", "E", "X"],
+            ["X", "X", "X", "X", "X", "X", "X"],
         ],
         # Start
         (1, 5),
         # Solutions
         [
             [(1, 5), (2, 5), (2, 4), (2, 3), (3, 3), (4, 3), (5, 3), (5, 4), (5, 5)],
-            [(1, 5), (1, 4), (2, 4), (2, 3), (3, 3), (4, 3), (5, 3), (5, 4), (5, 5)]
-        ]
+            [(1, 5), (1, 4), (2, 4), (2, 3), (3, 3), (4, 3), (5, 3), (5, 4), (5, 5)],
+        ],
     ]
 ]
 
@@ -91,6 +86,7 @@ test_mazes = [
 ################
 # DFS Solution #
 ################
+
 
 def solution_dfs(maze, start):
     global dfs_path
@@ -100,10 +96,7 @@ def solution_dfs(maze, start):
         return
     w = len(maze[0])
 
-    visited = [
-        [False for _ in range(w)]
-        for _ in range(h)
-    ]
+    visited = [[False for _ in range(w)] for _ in range(h)]
     dfs(maze, start[0], start[1], [], visited)
 
     return dfs_path
@@ -117,13 +110,13 @@ def dfs(maze, row, col, path, visited):
 
     invalid_row = row < 0 or row >= h
     invalid_col = col < 0 or col >= w
-    invalid_val = val == 'X'
+    invalid_val = val == "X"
     if invalid_row or invalid_col or invalid_val or visited[row][col]:
         return
 
     visited[row][col] = True
     path.append((row, col))
-    if val == 'E':
+    if val == "E":
         dfs_path = path
         return
 
@@ -135,20 +128,18 @@ def dfs(maze, row, col, path, visited):
 # BFS Solution #
 ################
 
+
 def solution_bfs(maze, start):
     queue = [[start]]
     h, w = len(maze), len(maze[0])
-    visited = [
-        [False for _ in range(w)]
-        for _ in range(h)
-    ]
+    visited = [[False for _ in range(w)] for _ in range(h)]
 
     while queue:
         path = queue.pop(0)
         y, x = path[-1]
         val = maze[y][x]
 
-        if val == 'E':
+        if val == "E":
             return path
 
         for _y, _x in directions:
@@ -156,7 +147,7 @@ def solution_bfs(maze, start):
 
             invalid_row = row < 0 or row >= h
             invalid_col = col < 0 or col >= w
-            invalid_val = val == 'X'
+            invalid_val = val == "X"
             if invalid_row or invalid_col or invalid_val or visited[row][col]:
                 continue
 
@@ -176,5 +167,5 @@ class Tests(unittest.TestCase):
             self.assertIn(output, solutions)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

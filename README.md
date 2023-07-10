@@ -5,7 +5,13 @@ A repository of custom challenges created by Kyle Nakamura, implemented in Pytho
 ### Repository Dependencies
 
 ```
-- Python 3.9.7
+name: coding-challenges
+channels:
+  - defaults
+dependencies:
+  - python>=3.10.0
+  - jupyter
+  - pip
 ```
 
 ### Challenges Overview
