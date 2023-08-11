@@ -46,4 +46,4 @@ def test_solve_problem(test_case_input, expected_output):
     solution_instance = Solution(test_case_input)
 
     # Assert that the output from the solve_problem method is equal to the expected output from the test case.
-    assert solution_instance.solve_problem() == expected_output
+    assert str(solution_instance.solve_problem()) == str(expected_output)
