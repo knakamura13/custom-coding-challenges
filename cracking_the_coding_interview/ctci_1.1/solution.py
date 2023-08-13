@@ -1,15 +1,9 @@
 class Solution:
-    """
-    Determine if a string has all unique characters using no additional data structures.
-    """
-
     def __init__(self, _input):
-        """Initialize the problem and solution."""
         self.input = _input
 
     def solve_problem(self):
-        """Solve the problem."""
-        solution = 1
+        """Solution: O(n^2) time, O(n) space."""
         chars = ''
 
         for char in self.input:
@@ -17,4 +11,20 @@ class Solution:
                 return 0
             chars += char
 
-        return solution
+        return 1
+
+    def _variant_optimal_time(self):
+        """Variant: O(n) time, O(n) space."""
+        chars = set()
+        for char in self.input:
+            if char in chars:
+                return 0
+            chars.add(char)
+        return 1
+
+    def _variant_optimal_space(self):
+        """Variant: O(n^2) time, O(n) space."""
+        for i in range(len(self.input)):
+            if self.input[i] in self.input[i + 1:]:
+                return 0
+        return 1
