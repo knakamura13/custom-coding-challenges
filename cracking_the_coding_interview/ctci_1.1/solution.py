@@ -8,23 +8,23 @@ class Solution:
 
         for char in self.input:
             if char in chars:
-                return 0
+                return False
             chars += char
 
-        return 1
+        return True
 
     def _variant_optimal_time(self):
         """Variant: O(n) time, O(n) space."""
         chars = set()
         for char in self.input:
             if char in chars:
-                return 0
+                return False
             chars.add(char)
-        return 1
+        return True
 
     def _variant_optimal_space(self):
         """Variant: O(n^2) time, O(n) space."""
         for i in range(len(self.input)):
             if self.input[i] in self.input[i + 1:]:
-                return 0
-        return 1
+                return False
+        return True
