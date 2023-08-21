@@ -2,7 +2,8 @@ name: coding-challenges
 channels:
   - defaults
 dependencies:
-  - python>=3.10.0
+  - python=3.11
   - jupyter
   - pip
-    - pytest
+  - pip:
+      - pytest
