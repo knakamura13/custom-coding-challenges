@@ -1,0 +1,71 @@
+Tact Coa
+True
+---
+Gone Quickly
+False
+---
+a
+True
+---
+ab
+False
+---
+Radar
+True
+---
+123321
+True
+---
+No lemon, no melon
+True
+---
+Hello, world!
+False
+---
+A man, a plan, a canal: Panama
+True
+---
+racecar
+True
+---
+
+True
+---
+A
+True
+---
+Aa
+True
+---
+aA
+True
+---
+Abc cBa
+True
+---
+!@#$%^&*()
+True
+---
+No X in Nixon
+True
+---
+Madam In Eden, I’m Adam
+True
+---
+Never Odd or Even
+True
+---
+Was it a car or a cat I saw?
+True
+---
+Able was I ere I saw Elba
+True
+---
+1a2
+True
+---
+aabbccdde
+True
+---
+aabbccddef
+False
