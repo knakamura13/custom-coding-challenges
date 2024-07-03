@@ -31,6 +31,9 @@ True
 cat,cats
 True
 ---
+flower,flow
+False
+---
 flow,flower
 False
 ---
@@ -41,6 +44,9 @@ apple,applepie
 False
 ---
 night,knight
+True
+---
+knight,night
 True
 ---
 splash,SPLASH

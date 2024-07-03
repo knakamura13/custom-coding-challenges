@@ -6,31 +6,23 @@ class Solution:
 
     def solve_problem(self):
         """Solution: O(n) time, O(n) space."""
-        # Check if strings are identical (zero edits)
         if self.s0 == self.s1:
             return True
 
         if abs(len(self.s0) - len(self.s1)) > 1:
             return False
 
-        for idx in range(min(len(self.s0), len(self.s1)) + 1):
-            if idx < len(self.s0) and idx < len(self.s1):
-                # Return True if inserting an arbitrary character to either string would make them equal
-                s0_replaced = f'{self.s0[:idx]}*{self.s0[idx + 1:]}'
-                s0_inserted = f'{self.s0[:idx]}*{self.s0[idx:]}'
-                s1_replaced = f'{self.s1[:idx]}*{self.s1[idx + 1:]}'
-                s1_inserted = f'{self.s1[:idx]}*{self.s1[idx:]}'
-                if (s0_replaced == s1_replaced
-                        or s0_replaced == s1_inserted
-                        or s0_inserted == s1_replaced
-                        or s0_inserted == s1_inserted):
-                    return True
-                continue
+        # Return True if deleting the last character from either string would make them equal
+        if self.s0[:-1] == self.s1 or self.s1[:-1] == self.s0:
+            return True
 
-            # Return True if removing an arbitrary character from either string would make them equal
-            s0_removed = f'{self.s0[:idx]}{self.s0[idx + 1:]}'
-            s1_removed = f'{self.s1[:idx]}{self.s1[idx + 1:]}'
-            if s0_removed == self.s1 or s1_removed == self.s0:
+        # Return True if inserting OR replacing an arbitrary character in either string would make them equal
+        for i in range(len(self.s0) + 1):
+            s0_w_insert = self.s0[:i] + '*' + self.s0[i:]
+            s1_w_insert = self.s1[:i] + '*' + self.s1[i:]
+            s0_w_replace = self.s0[:i] + '*' + self.s0[i + 1:]
+            s1_w_replace = self.s1[:i] + '*' + self.s1[i + 1:]
+            if s0_w_replace == s1_w_replace or s0_w_replace == s1_w_insert or s0_w_insert == s1_w_replace:
                 return True
 
         return False
@@ -45,10 +37,9 @@ class Solution:
             return False
 
         # Identify which string is longer
+        longer, shorter = self.s1, self.s0
         if len_s0 > len_s1:
             longer, shorter = self.s0, self.s1
-        else:
-            longer, shorter = self.s1, self.s0
 
         # Initialize variables to track indices and a flag for finding a difference
         found_difference = False
@@ -61,7 +52,7 @@ class Solution:
                     # More than one mismatch found
                     return False
 
-                # Record the mismatch
+                # Record the first mismatch
                 found_difference = True
 
                 # If lengths are equal, move the shorter index (case of potential replacement)
