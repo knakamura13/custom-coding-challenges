@@ -18,14 +18,11 @@ class Solution:
         # Count occurrences of each unique character
         char_count_dict = {}
         for char in self.s:
-            if char not in char_count_dict:
-                char_count_dict[char] = 0
-            char_count_dict[char] += 1
+            char_count_dict[char] = char_count_dict.get(char, 0) + 1
 
-        # Check if all characters, except one, belong to a pair
+        # Check how many characters have an odd number of occurrences
         num_odd_pairs = 0
-        for char in char_count_dict:
-            count = char_count_dict[char]
+        for count in char_count_dict.values():
             if count % 2:
                 num_odd_pairs += 1
 
@@ -35,8 +32,6 @@ class Solution:
         """Solution: O(n) time, O(n) space."""
         if len(self.s) <= 1:
             return True
-
         char_count = {char: self.s.count(char) for char in set(self.s)}
         num_odd = sum(count % 2 for count in char_count.values())
-
         return num_odd <= 1
