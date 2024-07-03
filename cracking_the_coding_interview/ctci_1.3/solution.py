@@ -33,7 +33,7 @@ class Solution:
         j = new_length - 1
         for i in range(self.true_length - 1, -1, -1):
             if char_list[i] == self.SPACE_DECODED:
-                char_list[j - 2:j + 1] = '%20'
+                char_list[j - 2:j + 1] = self.SPACE_ENCODED
                 j -= 3
             else:
                 char_list[j] = char_list[i]
