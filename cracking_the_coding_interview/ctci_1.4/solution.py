@@ -35,3 +35,16 @@ class Solution:
         char_count = {char: self.s.count(char) for char in set(self.s)}
         num_odd = sum(count % 2 for count in char_count.values())
         return num_odd <= 1
+
+    def _variant_dynamic_programming(self) -> bool:
+        """Variant: O(n) time, O(n) space."""
+        dp = [0] * 26  # Assuming only lowercase English letters
+
+        # Fill the DP table with character counts
+        for char in self.s:
+            dp[ord(char) - ord('a')] += 1
+
+        # Check how many characters have an odd number of occurrences
+        num_odd = sum(count % 2 for count in dp)
+
+        return num_odd <= 1

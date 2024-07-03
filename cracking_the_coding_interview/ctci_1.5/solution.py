@@ -67,3 +67,30 @@ class Solution:
 
         # If the loop completes without finding more than one difference, return True
         return True
+
+    def _variant_dynamic_programming(self):
+        """Solution: O(n * m) time, O(n * m) space."""
+        len_s0, len_s1 = len(self.s0), len(self.s1)
+
+        # If the difference in lengths is greater than 1, they can't be one edit away
+        if abs(len_s0 - len_s1) > 1:
+            return False
+
+        # Create a DP table to store the edit distances
+        dp = [[0] * (len_s1 + 1) for _ in range(len_s0 + 1)]
+
+        for i in range(len_s0 + 1):
+            for j in range(len_s1 + 1):
+                if i == 0:
+                    dp[i][j] = j  # If s0 is empty, all characters of s1 need to be inserted
+                elif j == 0:
+                    dp[i][j] = i  # If s1 is empty, all characters of s0 need to be deleted
+                elif self.s0[i - 1] == self.s1[j - 1]:
+                    dp[i][j] = dp[i - 1][j - 1]  # If characters are the same, no new edit
+                else:
+                    dp[i][j] = 1 + min(dp[i - 1][j],  # Deletion
+                                       dp[i][j - 1],  # Insertion
+                                       dp[i - 1][j - 1])  # Replacement
+
+        # The edit distance is the value in the bottom-right corner of the table
+        return dp[len_s0][len_s1] <= 1

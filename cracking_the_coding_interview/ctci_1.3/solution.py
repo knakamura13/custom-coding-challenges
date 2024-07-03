@@ -40,3 +40,24 @@ class Solution:
                 j -= 1
 
         return ''.join(char_list)
+
+    def _variant_dynamic_programming(self):
+        """Variant: O(n) time, O(n) space."""
+        n = self.true_length
+        dp = [''] * n
+
+        # Fill the DP table with the original characters
+        for i in range(n):
+            dp[i] = self.s[i]
+
+        # Create a result list to store the final characters
+        result = []
+
+        # Iterate through the DP table and replace spaces with '%20'
+        for i in range(n):
+            if dp[i] == self.SPACE_DECODED:
+                result.append(self.SPACE_ENCODED)
+            else:
+                result.append(dp[i])
+
+        return ''.join(result)

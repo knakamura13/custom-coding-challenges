@@ -32,3 +32,29 @@ class Solution:
             if char_counts[ord(char)] < 0:
                 return False
         return True
+
+    def _variant_dynamic_programming(self):
+        """Variant: O(n^2) time, O(n^2) space."""
+        len_s1, len_s2 = len(self.s1), len(self.s2)
+
+        # If the lengths are not equal, they can't be permutations
+        if len_s1 != len_s2:
+            return False
+
+        # Create a DP table to store the character counts
+        dp = [[0] * 128 for _ in range(2)]  # Assuming ASCII character set
+
+        # Fill the DP table for s1
+        for char in self.s1:
+            dp[0][ord(char)] += 1
+
+        # Fill the DP table for s2
+        for char in self.s2:
+            dp[1][ord(char)] += 1
+
+        # Compare the character counts
+        for i in range(128):
+            if dp[0][i] != dp[1][i]:
+                return False
+
+        return True
