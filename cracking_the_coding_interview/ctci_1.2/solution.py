@@ -34,7 +34,7 @@ class Solution:
         return True
 
     def _variant_dynamic_programming(self):
-        """Variant: O(n^2) time, O(n^2) space."""
+        """Variant: O(n) time, O(1) space."""
         len_s1, len_s2 = len(self.s1), len(self.s2)
 
         # If the lengths are not equal, they can't be permutations

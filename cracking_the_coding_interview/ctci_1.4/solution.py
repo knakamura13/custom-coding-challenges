@@ -29,7 +29,7 @@ class Solution:
         return num_odd_pairs <= 1
 
     def _variant_optimal_code_simplicity(self) -> bool:
-        """Solution: O(n) time, O(n) space."""
+        """Solution: O(n^2) time, O(n) space."""
         if len(self.s) <= 1:
             return True
         char_count = {char: self.s.count(char) for char in set(self.s)}
@@ -37,7 +37,7 @@ class Solution:
         return num_odd <= 1
 
     def _variant_dynamic_programming(self) -> bool:
-        """Variant: O(n) time, O(n) space."""
+        """Variant: O(n) time, O(1) space."""
         dp = [0] * 26  # Assuming only lowercase English letters
 
         # Fill the DP table with character counts

@@ -5,7 +5,7 @@ class Solution:
         self.s1 = self.strings[1]
 
     def solve_problem(self):
-        """Solution: O(n) time, O(n) space."""
+        """Solution: O(n^2) time, O(n) space."""
         if self.s0 == self.s1:
             return True
 

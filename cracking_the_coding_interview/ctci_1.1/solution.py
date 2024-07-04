@@ -23,14 +23,14 @@ class Solution:
         return True
 
     def _variant_optimal_space(self):
-        """Variant: O(n^2) time, O(n) space."""
+        """Variant: O(n^2) time, O(1) space."""
         for i in range(len(self.input)):
             if self.input[i] in self.input[i + 1:]:
                 return False
         return True
 
     def _variant_dynamic_programming(self):
-        """Variant: O(n^2) time, O(n) space."""
+        """Variant: O(n^2) time, O(n^2) space."""
         n = len(self.input)
         dp = [[False] * n for _ in range(n)]
 
