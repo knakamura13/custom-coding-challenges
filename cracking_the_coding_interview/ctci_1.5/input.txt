@@ -1,65 +1,65 @@
-pales,pale
+"pales", "pale"
 True
 ---
-pale,pales
+"pale", "pales"
 True
 ---
-pale,bale
+"pale", "bale"
 True
 ---
-pale,ple
+"pale", "ple"
 True
 ---
-pale,bake
+"pale", "bake"
 False
 ---
-star,starts
+"star", "starts"
 False
 ---
-lead,deal
+"lead", "deal"
 False
 ---
-flash,flashes
+"flash", "flashes"
 False
 ---
-cake,cake
+"cake", "cake"
 True
 ---
-brake,rake
+"brake", "rake"
 True
 ---
-cat,cats
+"cat", "cats"
 True
 ---
-flower,flow
+"flower", "flow"
 False
 ---
-flow,flower
+"flow", "flower"
 False
 ---
-apple,aple
+"apple", "aple"
 True
 ---
-apple,applepie
+"apple", "applepie"
 False
 ---
-night,knight
+"night", "knight"
 True
 ---
-knight,night
+"knight", "night"
 True
 ---
-splash,SPLASH
+"splash", "SPLASH"
 False
 ---
-,
+"", ""
 True
 ---
-,x
+"", "x"
 True
 ---
-x,
+"x", ""
 True
 ---
-x,1
+"x", "1"
 True

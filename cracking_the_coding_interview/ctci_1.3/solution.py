@@ -1,6 +1,6 @@
 class Solution:
     def __init__(self, _input):
-        self.s, self.true_length = _input.split('\n')
+        self.s, self.true_length = _input
         self.true_length = int(self.true_length)
         self.SPACE_DECODED = ' '
         self.SPACE_ENCODED = '%20'

@@ -1,23 +1,17 @@
-alphabet
-betaphal
+"alphabet", "betaphal"
 True
 ---
-racecar
-aaccerr
+"racecar", "aaccerr"
 True
 ---
-racecar
-racocar
+"racecar", "racocar"
 False
 ---
-missmatched
-matched
+"missmatched", "matched"
 False
 ---
-underdogs
-downunder
+"underdogs", "downunder"
 False
 ---
-abcdefg
-gfedcba
+"abcdefg", "gfedcba"
 True

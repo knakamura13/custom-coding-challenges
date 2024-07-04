@@ -1,6 +1,6 @@
 class Solution:
     def __init__(self, _input):
-        self.strings = _input.split(',')
+        self.strings = _input
         self.s0 = self.strings[0]
         self.s1 = self.strings[1]
 

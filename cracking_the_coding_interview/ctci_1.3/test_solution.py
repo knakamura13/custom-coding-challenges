@@ -1,5 +1,5 @@
-import logging
 import pytest
+import logging
 from solution import Solution
 
 TEST_CASES_FILENAME = 'input.txt'  # The text file containing test cases.
@@ -10,7 +10,7 @@ def load_test_cases():
     """
     Load the test cases from the text file. Each test case is defined as a block of text separated by the
     TEST_CASE_SEPARATOR. The last line of each block is treated as the expected output, and all other lines are
-    treated as the input.
+    treated as the inputs. Each line of input/output is evaluated as if it were a Python variable.
     """
     # Attempt to open the file and read its contents.
     try:
@@ -34,8 +34,8 @@ def load_test_cases():
             logging.error(f"Test case #{i} is malformed (missing input, output, or both).")
             continue
 
-        test_input, test_output = parts
-        test_cases.append((test_input.strip(), test_output.strip()))
+        test_input, test_output = eval(parts[0]), eval(parts[1])
+        test_cases.append((test_input, test_output))
 
     return test_cases
 
@@ -46,4 +46,4 @@ def test_solve_problem(test_case_input, expected_output):
     solution_instance = Solution(test_case_input)
 
     # Assert that the output from the solve_problem method is equal to the expected output from the test case.
-    assert str(solution_instance.solve_problem()) == str(expected_output)
+    assert solution_instance.solve_problem() == expected_output

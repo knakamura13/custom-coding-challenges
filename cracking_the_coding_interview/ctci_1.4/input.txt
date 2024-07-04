@@ -1,71 +1,71 @@
-Tact Coa
+"Tact Coa"
 True
 ---
-Gone Quickly
+"Gone Quickly"
 False
 ---
-a
+"a"
 True
 ---
-ab
+"ab"
 False
 ---
-Radar
+"Radar"
 True
 ---
-123321
+"123321"
 True
 ---
-No lemon, no melon
+"No lemon, no melon"
 True
 ---
-Hello, world!
+"Hello, world!"
 False
 ---
-A man, a plan, a canal: Panama
+"A man, a plan, a canal: Panama"
 True
 ---
-racecar
+"racecar"
 True
 ---
-
+""
 True
 ---
-A
+"A"
 True
 ---
-Aa
+"Aa"
 True
 ---
-aA
+"aA"
 True
 ---
-Abc cBa
+"Abc cBa"
 True
 ---
-!@#$%^&*()
+"!@#$%^&*()"
 True
 ---
-No X in Nixon
+"No X in Nixon"
 True
 ---
-Madam In Eden, I’m Adam
+"Madam In Eden, I’m Adam"
 True
 ---
-Never Odd or Even
+"Never Odd or Even"
 True
 ---
-Was it a car or a cat I saw?
+"Was it a car or a cat I saw?"
 True
 ---
-Able was I ere I saw Elba
+"Able was I ere I saw Elba"
 True
 ---
-1a2
+"1a2"
 True
 ---
-aabbccdde
+"aabbccdde"
 True
 ---
-aabbccddef
+"aabbccddef"
 False

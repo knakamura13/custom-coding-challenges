@@ -1,11 +1,8 @@
-Mr John Smith
-13
-Mr%20John%20Smith
+'Mr John Smith', 13
+'Mr%20John%20Smith'
 ---
-We're all happiest at home
-26
-We're%20all%20happiest%20at%20home
+"We're all happiest at home", 26
+"We're%20all%20happiest%20at%20home"
 ---
-'Tis%20but%20a%20scratch!
-25
-'Tis%20but%20a%20scratch!
+"Tis%20but%20a%20scratch!", 25
+"Tis%20but%20a%20scratch!"

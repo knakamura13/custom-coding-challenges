@@ -1,6 +1,6 @@
 class Solution:
     def __init__(self, _input):
-        self.s1, self.s2 = _input.split('\n')
+        self.s1, self.s2 = _input
 
     def solve_problem(self):
         """Solution: O(n) time, O(n) space."""
