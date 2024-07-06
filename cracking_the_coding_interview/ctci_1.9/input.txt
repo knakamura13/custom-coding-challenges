@@ -1,0 +1,35 @@
+('waterbottle', 'erbottlewat')
+True
+---
+('rotationtest', 'testrotation')
+True
+---
+('rotationtest', 'otationtestro')
+False
+---
+('abcdefg', 'fgabcde')
+True
+---
+('abcdefg', 'gfabcde')
+False
+---
+('abcd', 'abcd')
+True
+---
+('abcd', 'dcba')
+False
+---
+('', '')
+True
+---
+('a', 'a')
+True
+---
+('a', 'b')
+False
+---
+('aa', 'aa')
+True
+---
+('aa', 'aaa')
+False
