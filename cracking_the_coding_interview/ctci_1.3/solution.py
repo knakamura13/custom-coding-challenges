@@ -43,18 +43,17 @@ class Solution:
 
     def _variant_dynamic_programming(self):
         """Variant: O(n) time, O(n) space."""
-        n = self.true_length
-        dp = [''] * n
+        dp = [''] * self.true_length
 
         # Fill the DP table with the original characters
-        for i in range(n):
+        for i in range(self.true_length):
             dp[i] = self.s[i]
 
         # Create a result list to store the final characters
         result = []
 
         # Iterate through the DP table and replace spaces with '%20'
-        for i in range(n):
+        for i in range(self.true_length):
             if dp[i] == self.SPACE_DECODED:
                 result.append(self.SPACE_ENCODED)
             else:

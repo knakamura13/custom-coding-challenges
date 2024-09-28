@@ -24,9 +24,11 @@ class Solution:
 
     def _variant_optimal_space(self):
         """Variant: O(n^2) time, O(1) space."""
-        for i in range(len(self.input)):
+        i = 0
+        for _ in self.input:
             if self.input[i] in self.input[i + 1:]:
                 return False
+            i += 1
         return True
 
     def _variant_dynamic_programming(self):
@@ -47,3 +49,15 @@ class Solution:
                     return False
 
         return True
+
+    """
+    st = a b c d e d f
+    
+    dp = 0 0 0 0 0 0 0
+    dp = 0 0 0 0 0 0 0
+    dp = 0 0 0 0 0 0 0
+    dp = 0 0 0 0 0 0 0
+    dp = 0 0 0 0 0 0 0
+    dp = 0 0 0 0 0 1 0
+    dp = 0 0 0 0 0 1 1
+    """
