@@ -15,3 +15,6 @@ False
 ---
 "abcdefg", "gfedcba"
 True
+---
+"aabc", "abbc"
+False

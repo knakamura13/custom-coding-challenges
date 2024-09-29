@@ -4,11 +4,8 @@ class Solution:
 
     def solve_problem(self):
         """Solution: O(n) time, O(n) space."""
-        if len(self.s1) != len(self.s2):
+        if len(self.s1) != len(self.s2) or set(self.s1) != set(self.s2):
             return False
-
-        if set(self.s1) == set(self.s2):
-            return True
 
         char_counts_a, char_counts_b = {}, {}
 
