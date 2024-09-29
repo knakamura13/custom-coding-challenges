@@ -3,7 +3,7 @@ class Solution:
         self.input = _input
 
     def solve_problem(self):
-        """Solution: O(n) time, O(n) space."""
+        """Solution: O(n log n) time, O(n) space."""
         sorted_list = sorted(self.input)
         prev_smallest = 0
 
